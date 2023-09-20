@@ -1,0 +1,112 @@
+オブジェクト指向のメリット
+
+１．カプセル化
+コード内のデータ本体を隠蔽し、データにアクセスする仕組み（メソッド）をひとまとめにして開示する手法。
+データと仕組みを分離しデータを直接変更できないようにすることで、データの保守性やセキュリティの向上が期待できる。
+また、データの取り扱いが内部で隠蔽されているため、受け取ったデータを使用する仕組みに影響を与えづらく、変更に対し柔軟に対応できる。
+Javaでは、データそのものをprivateで定義し、それらを呼び出すメソッドをpublicで定義することで実装される。
+また、データを変更する際の制限を仕組み側で制御することもできる。
+【例】カプセル化
+public class CapsuleEx {
+    private int kazu;  // 情報が隠蔽される内部データ
+    public CapsuleEx(int kazu) {
+        this.kazu = kazu;
+    }
+    public int kazuGet() {
+        return kazu;
+    }  // 内部データを取得するメソッド
+    public void kazuSet(int kazu) {
+        if (kazu > 0) {
+            this.kazu = kazu;
+        }  // 内部データを更新するメソッド
+    }
+}
+
+２．継承
+新しくクラスを作る際に、既存のクラスから変数の定義やメソッドを引き継ぐことができる。
+これにより、似た機能を持つ別のコードを実装する際にコードを再利用することで効率的な開発が可能となるメリットがある。
+引継ぎの際の既存クラス側をスーパークラス、引継ぎ後のクラスをサブクラスと呼称する。
+サブクラスでは、スーパークラス側の変数やメソッドを使用することができる。
+さらに、スーパークラスのメソッドをサブクラスが上書きすることもできる、オーバーライドという機能もある。
+これらにより、引き継いだサブクラス側で、スーパークラスとの差分のみの変更により必要な機能の実装が可能となる。
+
+３．抽象化
+ある機能や内部構造を集約し、主要因または主要な構造を強調する機能。Javaの実装では、継承とセットになる。
+抽象化により、詳細設定を大枠から分離することができ、変更や保守が容易になる。
+また、抽象化クラスでデータを要約することで、プログラムの設計を助けるメリットがある。
+【例】抽象化
+    abstract class AbstractionEx {  // 抽象クラス
+    private String maker;
+    public AbstractionEx(String maker) {
+        this.maker = maker;
+    }
+    public String getMaker() {
+        return maker;
+    }
+    public abstract void product();  // 抽象メソッド
+    }
+    class filmCamera extends AbstractionEx {  // サブクラスfilmCameraで抽象クラスを拡張
+        public filmCamera(String maker) {
+            super(maker);
+        }
+        @Override
+        public void product() {
+            System.out.println(getMaker() + "製のカメラです。現像することで写真を確認できます。");
+        }
+    }
+    class digitalCamera extends AbstractionEx {  // サブクラスdigitalCameraで抽象クラスを拡張
+        public digitalCamera(String maker) {
+            super(maker);
+        }
+        @Override
+        public void product() {
+            System.out.println(getMaker() + "製のカメラです。SDカードを読み取ることで写真データを確認できます。");
+        }
+    }
+    public class Main {
+        public static void main(String[] args) {
+            AbstractionEx filmCam = new filmCamera("Canon");
+            AbstractionEx digitalCam = new digitalCamera("Nikon");
+            filmCam.product();
+            digitalCam.product();
+        }
+    }
+
+４．ポリモーフィズム
+あるひとつのメソッドを呼び出した際に、呼び出したものごとに異なる振る舞いができる機能。Javaの実装では、抽象化とセットになる。
+プログラムの設計において、異なるオブジェクトを扱う際に定義を共通化することで、柔軟に設計ができる。
+また、定義を共通化できることのメリットとして、コードの再利用が容易となる点もある。
+【例】ポリモーフィズム
+    abstract class PolymorphismEx {
+        public abstract String getTaste();  // 抽象メソッドgetTasteを定義
+    }
+    class AstringentPersimmon extends PolymorphismEx {
+       private String productionArea;
+ 
+        public AstringentPersimmon(String productionArea) {
+            this.productionArea = productionArea;
+        }
+
+        @Override
+        public String getTaste() {  // AstringentPersimmonにおけるgetTasteのふるまい
+            return productionArea + "の柿はしぶい";
+        }
+    }
+    class SweetPersimmon extends PolymorphismEx {
+        private int sugar;
+        public SweetPersimmon(int sugar) {
+            this.sugar = sugar;
+        }
+        @Override
+            public String getTaste() {  // SweetPersimmonにおけるgetTasteのふるまい
+                return "この柿の糖度は" + sugar + "度である";
+            }
+        }
+    public class Main {
+        public static void main(String[] args) {
+            PolymorphismEx astringent = new AstringentPersimmon("静岡");
+            PolymorphismEx sweet = new SweetPersimmon(15);
+            System.out.println(astringent.getTaste());
+            System.out.println(sweet.getTaste());
+        }
+    }
