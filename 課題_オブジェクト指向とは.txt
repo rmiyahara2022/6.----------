@@ -80,7 +80,7 @@ public class CapsuleEx {
     abstract class PolymorphismEx {
         public abstract String getTaste();  // 抽象メソッドgetTasteを定義
     }
-    class 1stringentPersimmon extends PolymorphismEx {
+    class astringentPersimmon extends PolymorphismEx {
        private String productionArea;
          public 1stringentPersimmon(String productionArea) {
             this.productionArea = productionArea;
