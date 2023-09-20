@@ -80,32 +80,30 @@ public class CapsuleEx {
     abstract class PolymorphismEx {
         public abstract String getTaste();  // 抽象メソッドgetTasteを定義
     }
-    class AstringentPersimmon extends PolymorphismEx {
+    class 1stringentPersimmon extends PolymorphismEx {
        private String productionArea;
- 
-        public AstringentPersimmon(String productionArea) {
+         public 1stringentPersimmon(String productionArea) {
             this.productionArea = productionArea;
         }
-
         @Override
-        public String getTaste() {  // AstringentPersimmonにおけるgetTasteのふるまい
+        public String getTaste() {  // astringentPersimmonにおけるgetTasteのふるまい
             return productionArea + "の柿はしぶい";
         }
     }
-    class SweetPersimmon extends PolymorphismEx {
+    class sweetPersimmon extends PolymorphismEx {
         private int sugar;
-        public SweetPersimmon(int sugar) {
+        public sweetPersimmon(int sugar) {
             this.sugar = sugar;
         }
         @Override
-            public String getTaste() {  // SweetPersimmonにおけるgetTasteのふるまい
+            public String getTaste() {  // sweetPersimmonにおけるgetTasteのふるまい
                 return "この柿の糖度は" + sugar + "度である";
             }
         }
     public class Main {
         public static void main(String[] args) {
-            PolymorphismEx astringent = new AstringentPersimmon("静岡");
-            PolymorphismEx sweet = new SweetPersimmon(15);
+            PolymorphismEx astringent = new astringentPersimmon("静岡");
+            PolymorphismEx sweet = new sweetPersimmon(15);
             System.out.println(astringent.getTaste());
             System.out.println(sweet.getTaste());
         }
