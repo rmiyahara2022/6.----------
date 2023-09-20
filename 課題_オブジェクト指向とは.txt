@@ -82,7 +82,7 @@ public class CapsuleEx {
     }
     class astringentPersimmon extends PolymorphismEx {
        private String productionArea;
-         public 1stringentPersimmon(String productionArea) {
+         public astringentPersimmon(String productionArea) {
             this.productionArea = productionArea;
         }
         @Override
